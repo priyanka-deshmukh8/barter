@@ -25,7 +25,6 @@ const navItems = [
   { href: '/', label: 'Home' },
   { href: '/explore', label: 'Explore' },
   { href: '/dashboard', label: 'Dashboard' },
-  { href: '/my-skills', label: 'My Skills' },
   { href: '/messages', label: 'Messages' },
 ]
 

@@ -9,7 +9,8 @@ import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Home, ChevronRight, User, Settings, Menu, Bell, Search, Edit, Github, Twitter, Linkedin, MapPin, Mail, Calendar } from 'lucide-react'
+import {  Edit, Github, Twitter, Linkedin, MapPin, Mail, Calendar } from 'lucide-react'
+import { ChevronRight, Book, Users, Award, Clock,  Home, User, Menu, Bell, Search, Settings, LogOut, EarthIcon, GroupIcon, MessagesSquareIcon } from 'lucide-react'
 
 const skillsData = [
   { name: 'JavaScript', level: 'Advanced', progress: 85, color: '#F7DF1E' },
@@ -44,6 +45,9 @@ export default function EnhancedUserProfile() {
               <NavLink href="/dashboard" icon={<ChevronRight className="h-5 w-5" />} label="Dashboard" />
               <NavLink href="/profile" icon={<User className="h-5 w-5" />} label="Profile" active />
               <NavLink href="/settings" icon={<Settings className="h-5 w-5" />} label="Settings" />
+              <NavLink href="/explore" icon={<EarthIcon className="h-5 w-5" />} label="Explore" />
+              <NavLink href="/community" icon={<GroupIcon className="h-5 w-5" />} label="Community" />
+              <NavLink href="/messages" icon={<MessagesSquareIcon className="h-5 w-5" />} label="Messages" />
             </nav>
           </motion.aside>
         )}

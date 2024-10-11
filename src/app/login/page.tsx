@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
@@ -74,15 +74,17 @@ export default function LoginPage() {
                   </Label>
                   <a href="#" className="text-xs text-purple-500 hover:underline">Forgot Password?</a>
                 </div>
-                <Button 
-                  disabled={isLoading}
-                  className="w-full bg-purple-600 text-white py-2 rounded-xl hover:bg-purple-700 transition-colors"
-                >
-                  {isLoading && (
-                    <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Sign In
-                </Button>
+                <Link href="/dashboard">
+                  <Button 
+                    disabled={isLoading}
+                    className="w-full bg-purple-600 text-white py-2 rounded-xl hover:bg-purple-700 transition-colors"
+                  >
+                    {isLoading && (
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                   <a href="/dashboard">Sign In</a>
+                  </Button>
+                </Link>
               </div>
             </form>
           </div>

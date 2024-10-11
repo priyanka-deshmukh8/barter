@@ -39,6 +39,8 @@ function Header() {
           <Link href="#features" className="text-gray-300 hover:text-white transition-colors">Features</Link>
           <Link href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">How It Works</Link>
           <Link href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Testimonials</Link>
+          <Link href="/explore" className="text-gray-300 hover:text-white transition-colors">Explore</Link>
+
         </nav>
         <div className="flex items-center space-x-4">
           <Button asChild variant="ghost" className="text-white hover:text-black hover:bg-white">

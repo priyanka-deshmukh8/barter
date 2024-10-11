@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import { ChevronRight, Book, Users, Award, Clock, Calendar, Home, User, Menu, Bell, Search, Settings, LogOut } from 'lucide-react'
+import { ChevronRight, Book, Users, Award, Clock, Calendar, Home, User, Menu, Bell, Search, Settings, LogOut, EarthIcon, GroupIcon, MessagesSquareIcon } from 'lucide-react'
 import Link from 'next/link'
 import { FaAddressBook, FaIcons, FaInternetExplorer } from 'react-icons/fa'
 
@@ -55,7 +55,10 @@ export default function Dashboard() {
               <NavLink href="/dashboard" icon={<ChevronRight className="h-5 w-5" />} label="Dashboard" />
               <NavLink href="/profile" icon={<User className="h-5 w-5" />} label="Profile" />
               <NavLink href="/settings" icon={<Settings className="h-5 w-5" />} label="Settings" />
-              <NavLink href="/explore" icon={<FaAddressBook className="h-5 w-5" />} label="Explore" />
+              <NavLink href="/explore" icon={<EarthIcon className="h-5 w-5" />} label="Explore" />
+              <NavLink href="/community" icon={<GroupIcon className="h-5 w-5" />} label="Community" />
+              <NavLink href="/messages" icon={<MessagesSquareIcon className="h-5 w-5" />} label="Messages" />
+
             </nav>
           </motion.aside>
         )}
