@@ -52,7 +52,7 @@ export default function SkillListingPage() {
               <Image src="/logo.svg" alt="Barter Logo" width={40} height={40} />
               <span className="ml-2 text-2xl font-bold text-white">Barter</span>
             </div>
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden md:flex font-semibold space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -64,10 +64,10 @@ export default function SkillListingPage() {
               ))}
             </nav>
             <div className="flex items-center space-x-4">
-              <Button asChild variant="ghost" className="text-white hover:text-black hover:bg-white">
+              <Button asChild variant="ghost" className="text-white font-semibold hover:text-black hover:bg-white">
                 <Link href="/login">Log in</Link>
               </Button>
-              <Button asChild className="bg-white text-black hover:bg-gray-200">
+              <Button asChild className="bg-white text-black font-semibold hover:bg-gray-200">
                 <Link href="/signup">Sign up</Link>
               </Button>
               <button

@@ -67,16 +67,16 @@ export default function ExplorePage() {
           </div>
           <nav className="hidden md:flex space-x-8">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="text-gray-300 hover:text-white transition-colors">
+              <Link key={item.href} href={item.href} className=" font-semibold text-gray-300 hover:text-white transition-colors">
                 {item.label}
               </Link>
             ))}
           </nav>
           <div className="flex items-center space-x-4">
-            <Button asChild variant="ghost" className="text-white hover:text-black hover:bg-white">
+            <Button asChild variant="ghost" className="text-white font-semibold hover:text-black hover:bg-white">
               <Link href="/login">Log in</Link>
             </Button>
-            <Button asChild className="bg-white text-black hover:bg-gray-200">
+            <Button asChild className="bg-white font-semibold text-black hover:bg-gray-200">
               <Link href="/signup">Sign up</Link>
             </Button>
             <button
@@ -115,7 +115,7 @@ export default function ExplorePage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+            className="text-4xl md:text-5xl py-5 font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
           >
             Explore Skills
           </motion.h1>
@@ -124,7 +124,7 @@ export default function ExplorePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
+            className="mb-8 "
           >
             <Card className="bg-gray-900 border-purple-500">
               <CardContent className="p-6">
@@ -236,7 +236,7 @@ export default function ExplorePage() {
             >
               <Link href="/skills_list">
                 <Button
-                  className="bg-purple-600 text-white hover:bg-purple-700 transition-colors duration-200 px-6 py-3 text-lg"
+                  className="bg-purple-600 font-semibold text-white hover:bg-purple-700 transition-colors duration-200 px-6 py-3 text-lg"
                 >
                   Explore More Skills
                 </Button>

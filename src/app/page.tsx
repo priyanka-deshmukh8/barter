@@ -35,16 +35,16 @@ function Header() {
           <span className="ml-2 text-2xl font-bold text-white">Barter</span>
         </div>
         <nav className="hidden md:flex space-x-8">
-          <Link href="#features" className="text-gray-300 hover:text-white transition-colors">Features</Link>
-          <Link href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">How It Works</Link>
-          <Link href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Testimonials</Link>
-          <Link href="/explore" className="text-gray-300 hover:text-white transition-colors">Explore</Link>
+          <Link href="#features" className="text-gray-300 text-white font-semibold hover:text-white transition-colors">Features</Link>
+          <Link href="#how-it-works" className="text-gray-300 text-white font-semibold  hover:text-white transition-colors">How It Works</Link>
+          <Link href="#testimonials" className="text-gray-300 text-white font-semibold hover:text-white transition-colors">Testimonials</Link>
+          <Link href="/explore" className="text-gray-300 text-white font-semibold hover:text-white transition-colors">Explore</Link>
         </nav>
-        <div className="flex items-center space-x-4">
-          <Button asChild variant="ghost" className="text-white hover:text-black hover:bg-white">
+        <div className="flex items-center text-white font-semibold space-x-4">
+          <Button asChild variant="ghost" className=" text-white font-semibold hover:text-black hover:bg-white">
             <Link href="/login">Log in</Link>
           </Button>
-          <Button asChild className="bg-white text-black hover:bg-gray-200">
+          <Button asChild className="bg-white text-black  text-black font-semibold hover:bg-gray-200">
             <Link href="/signup">Sign up</Link>
           </Button>
         </div>
