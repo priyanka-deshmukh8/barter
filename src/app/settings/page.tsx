@@ -97,7 +97,7 @@ function Header() {
         </div>
         <nav className="hidden md:flex space-x-8">
           <Link href="/" className="text-gray-300 hover:text-white transition-colors">Home</Link>
-          <Link href="/chat" className="text-gray-300 hover:text-white transition-colors">Chat</Link>
+          <Link href="/messages" className="text-gray-300 hover:text-white transition-colors">Messages</Link>
           <Link href="/explore" className="text-gray-300 hover:text-white transition-colors">Explore</Link>
           <Link href="/settings" className="text-gray-300 hover:text-white transition-colors">Settings</Link>
         </nav>
