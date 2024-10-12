@@ -26,11 +26,18 @@ export default function ContactPage() {
     e.preventDefault()
     // Here you would typically send the form data to your backend
     console.log('Form submitted:', formData)
-    toast({
-      title: "Message Sent",
-      description: "We've received your message and will get back to you soon.",
-    })
-    setFormData({ name: '', email: '', message: '' })
+   // Example of calling the toast function correctly
+toast({
+    title: "Success!",
+    description: "Your operation was successful.",
+    open: true, // 'open' is required
+    onOpenChange: (open) => {
+      if (!open) {
+        // handle when the toast closes, if needed
+      }
+    }
+  })
+  
   }
 
   return (
