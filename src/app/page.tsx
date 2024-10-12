@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useAnimation } from 'framer-motion'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowRight, Users, Zap, Globe, Lock } from 'lucide-react'
+import { ArrowRight, Users, Zap, Globe, Lock, ChevronLeft, ChevronRight, Shield, GitBranch, Cpu } from 'lucide-react'
 
 export default function ModernLandingPage() {
   return (
@@ -40,7 +39,6 @@ function Header() {
           <Link href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">How It Works</Link>
           <Link href="#testimonials" className="text-gray-300 hover:text-white transition-colors">Testimonials</Link>
           <Link href="/explore" className="text-gray-300 hover:text-white transition-colors">Explore</Link>
-
         </nav>
         <div className="flex items-center space-x-4">
           <Button asChild variant="ghost" className="text-white hover:text-black hover:bg-white">
@@ -152,38 +150,76 @@ function HowItWorksSection() {
 }
 
 function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const nextTestimonial = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+  }
+
+  const prevTestimonial = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
+  }
+
   return (
     <section id="testimonials" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">What Our Users Say</h2>
-        <Tabs defaultValue="tab1" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="tab1">Sarah J.</TabsTrigger>
-            <TabsTrigger value="tab2">Michael L.</TabsTrigger>
-            <TabsTrigger value="tab3">Emily R.</TabsTrigger>
-          </TabsList>
-          <TabsContent value="tab1">
-            <TestimonialCard
-              quote="Barter has completely transformed the way I learn. I've acquired so many new skills!"
-              author="Sarah J."
-              role="Graphic Designer"
-            />
-          </TabsContent>
-          <TabsContent value="tab2">
-            <TestimonialCard
-              quote="The community here is amazing. I've met incredible people and learned things I never thought I could."
-              author="Michael L."
-              role="Software Engineer"
-            />
-          </TabsContent>
-          <TabsContent value="tab3">
-            <TestimonialCard
-              quote="As a teacher, I love how Barter allows me to share my knowledge while learning new things too."
-              author="Emily R."
-              role="Language Tutor"
-            />
-          </TabsContent>
-        </Tabs>
+        <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+          What Our Users Say
+        </h2>
+        <div className="relative">
+          <AnimatePresence initial={false} custom={currentIndex}>
+            <motion.div
+              key={currentIndex}
+              custom={currentIndex}
+              initial={{ opacity: 0, rotateY: -90 }}
+              animate={{ opacity: 1, rotateY: 0 }}
+              exit={{ opacity: 0, rotateY: 90 }}
+              transition={{
+                type: 'spring',
+                stiffness: 100,
+                damping: 0,
+                duration: 0
+              }}
+              className="w-full max-w-2xl mx-auto"
+              style={{ perspective: 1000 }}
+            >
+              <Card className="bg-gray-900 border-purple-500 shadow-xl transform-gpu">
+                <CardContent className="p-8">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
+                      <img
+                        src={testimonials[currentIndex].avatar}
+                        alt={testimonials[currentIndex].author}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <p className="text-lg mb-4 text-white">"{testimonials[currentIndex].quote}"</p>
+                    <p className="font-semibold text-white">{testimonials[currentIndex].author}</p>
+                    <p className="text-sm text-gray-400">{testimonials[currentIndex].role}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </AnimatePresence>
+          <div className="absolute top-1/2 left-0 right-0 flex justify-between items-center -mt-4 px-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="bg-black/50 text-white hover:bg-black/70"
+              onClick={prevTestimonial}
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="bg-black/50 text-white hover:bg-black/70"
+              onClick={nextTestimonial}
+            >
+              <ChevronRight className="h-6 w-6" />
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -194,22 +230,46 @@ function BlockchainSection() {
     <section className="py-20 bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Secure Skill Exchange with Blockchain</h2>
-        <Card className="w-full max-w-2xl mx-auto bg-black border-purple-500">
+        <Card className="w-full max-w-3xl mx-auto bg-black border-purple-500">
           <CardContent className="pt-6">
-            <div className="flex items-center mb-4">
-              <Lock className="h-8 w-8 text-purple-500 mr-4" />
-              <h3 className="text-xl font-semibold text-white">How We Use Blockchain</h3>
+            <div className="flex items-center mb-6">
+              <GitBranch className="h-10 w-10 text-purple-500 mr-4" />
+              <h3 className="text-2xl font-semibold text-white">How We Use Blockchain</h3>
             </div>
-            <p className="text-gray-300 mb-4">
+            <p className="text-gray-300 mb-6">
               Barter leverages blockchain technology to create secure and transparent skill exchange contracts. 
               This ensures that all parties involved in a skill swap are protected and accountable.
             </p>
-            <ul className="list-disc list-inside text-gray-300 space-y-2">
-              <li>Smart contracts for each skill exchange</li>
-              <li>Immutable record of completed exchanges</li>
-              <li>Decentralized reputation system</li>
-              <li>Secure and transparent transactions</li>
-            </ul>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-start">
+                <Shield className="h-8 w-8 text-purple-500 mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Smart Contracts</h4>
+                  <p className="text-gray-400">Automated agreements for each skill exchange, ensuring fairness and transparency.</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <Lock className="h-8 w-8 text-purple-500 mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Immutable Records</h4>
+                  <p className="text-gray-400">Permanent and tamper-proof history of completed exchanges and user reputations.</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <Users className="h-8 w-8 text-purple-500 mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Decentralized Reputation</h4>
+                  <p className="text-gray-400">Trust scores based on community feedback and successful exchanges.</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <Cpu className="h-8 w-8 text-purple-500 mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Secure Transactions</h4>
+                  <p className="text-gray-400">Cryptographically secured exchanges of skills and knowledge.</p>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -237,6 +297,7 @@ function Footer() {
     <footer className="bg-black text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
+          
           <div>
             <h3 className="text-lg font-semibold mb-4">Barter</h3>
             <p className="text-sm text-gray-400">Exchange skills, grow together, and unlock your potential.</p>
@@ -266,7 +327,7 @@ function Footer() {
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218  2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
                 </svg>
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -318,24 +379,26 @@ function StepCard({ number, title, description }: { number: number; title: strin
   )
 }
 
-function TestimonialCard({ quote, author, role }: { quote: string; author: string; role: string }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className="bg-gray-900 p-6 rounded-lg border border-purple-500 text-white"
-    >
-      <p className="text-lg mb-4">"{quote}"</p>
-      <div className="flex items-center">
-        <div className="rounded-full bg-purple-900 w-12 h-12 flex items-center justify-center mr-4">
-          <span className="text-xl font-bold text-white">{author[0]}</span>
-        </div>
-        <div>
-          <p className="font-semibold">{author}</p>
-          <p className="text-sm text-gray-400">{role}</p>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
+const testimonials = [
+  {
+    id: 1,
+    quote: "Barter has completely transformed the way I learn. I've acquired so many new skills!",
+    author: "Sarah J.",
+    role: "Graphic Designer",
+    avatar: "/avatars/sarah.jpg"
+  },
+  {
+    id: 2,
+    quote: "The community here is amazing. I've met incredible people and learned things I never thought I could.",
+    author: "Michael L.",
+    role: "Software Engineer",
+    avatar: "/avatars/michael.jpg"
+  },
+  {
+    id: 3,
+    quote: "As a teacher, I love how Barter allows me to share my knowledge while learning new things too.",
+    author: "Emily R.",
+    role: "Language Tutor",
+    avatar: "/avatars/emily.jpg"
+  }
+]
